@@ -2,28 +2,36 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ringdingdong/app/services/secure_storage.dart';
 import 'package:ringdingdong/domain/entities/user.dart';
-import 'package:ringdingdong/domain/usercases/login_use_case.dart';
+import 'package:ringdingdong/domain/usecases/auth_use_cases.dart';
 
 class AuthController extends GetxController {
-  AuthController(this._loginUseCase);
-  final LoginUseCase _loginUseCase;
-  final storage = Get.find<SecureStorageService>();
-  var hasUserData = false.obs;
+  AuthController(this._authUseCase);
+  final AuthUseCase _authUseCase;
 
-  User? get user => storage.user;
+  final storage = Get.find<SecureStorageService>();
+  String token = "";
+
+  final hasUserData = false.obs;
+
+  late User? user;
 
   @override
   void onInit() async {
     super.onInit();
-    hasUserData.value = storage.user != null;
-  }
 
-  loginWith(String id) async {
-    try {
-      final user = await _loginUseCase.execute(id);
-      storage.user = user;
+    user = await storage.getUser();
+    hasUserData.value = user != null;
+
+    if (hasUserData.value) {
+      await _authUseCase.login();
       hasUserData.value = true;
       hasUserData.refresh();
+    }
+  }
+
+  login() async {
+    try {
+      await _authUseCase.login();
     } catch (error) {
       debugPrint(error.toString());
     }
@@ -32,5 +40,9 @@ class AuthController extends GetxController {
   logout() {
     storage.user = null;
     hasUserData.value = false;
+  }
+
+  policyAgree() async {
+    await _authUseCase.policyAgree();
   }
 }
