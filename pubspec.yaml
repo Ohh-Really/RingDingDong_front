@@ -34,8 +34,6 @@ dependencies:
   freezed_annotation: null
   get: null
   google_sign_in: ^5.4.4
-  html: ^0.15.1
-  webview_flutter: null
 
 dev_dependencies:
   build_runner: null
