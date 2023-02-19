@@ -1,5 +1,8 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:ringdingdong/app/services/secure_storage.dart';
 import 'package:ringdingdong/data/providers/network/api_provider.dart';
 import 'package:ringdingdong/data/providers/network/apis/auth_api.dart';
@@ -15,20 +18,44 @@ class AuthRepositoryIml extends AuthRepository {
     final authController = Get.find<AuthController>();
     User? user = await storage.getUser();
 
-    if (user == null) {
-      Get.toNamed('/google_login');
-    } else {
-      try {
-        authController.token = await AuthAPI.login(user.id, user.email).request();
+    storage.user = null;
 
-        if (authController.token.isNotEmpty) {
-          Future.delayed(Duration.zero, () {
-            Get.offAndToNamed('/main');
-          });
-        }
-      } on UnauthorisedException {
-        Get.offAndToNamed('/policy_agree');
+    if (user == null) {
+      try {
+        final GoogleSignInAccount? googleUser = await GoogleSignIn(
+          scopes: ["https://www.googleapis.com/auth/userinfo.email", "https://www.googleapis.com/auth/userinfo.profile"],
+        ).signIn();
+
+        user = User.fromJson({
+          'displayName': googleUser!.displayName!,
+          'email': googleUser.email,
+          'id': googleUser.id,
+          'photoUrl': googleUser.photoUrl,
+        });
+
+        authController.user = user;
+        storage.user = user;
+
+        GoogleSignIn().disconnect();
+      } catch (e) {
+        authController.user = null;
+        storage.user = null;
+        print(e);
       }
+    }
+
+    try {
+      authController.token = await AuthAPI.login(authController.user!.id, authController.user!.email).request();
+
+      if (authController.token.isNotEmpty) {
+        Future.delayed(Duration.zero, () {
+          Get.offAndToNamed('/main');
+        });
+      }
+    } on UnauthorisedException {
+      Get.offAndToNamed('/policy_agree');
+    } on BadRequestException {
+      Get.snackbar("로그인 실패", "알 수 없는 이유로 로그인에 실패하였습니다.", snackPosition: SnackPosition.BOTTOM, margin: const EdgeInsets.all(8.0));
     }
   }
 
