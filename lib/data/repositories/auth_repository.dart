@@ -20,9 +20,10 @@ class AuthRepositoryIml extends AuthRepository {
 
     if (user == null) {
       try {
-        final GoogleSignInAccount? googleUser = await GoogleSignIn(
-          scopes: ["https://www.googleapis.com/auth/userinfo.email", "https://www.googleapis.com/auth/userinfo.profile"],
-        ).signIn();
+        final GoogleSignInAccount? googleUser = await GoogleSignIn(scopes: [
+          "https://www.googleapis.com/auth/userinfo.email",
+          "https://www.googleapis.com/auth/userinfo.profile",
+        ]).signIn();
 
         user = User.fromJson({
           'displayName': googleUser!.displayName!,
