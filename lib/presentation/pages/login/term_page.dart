@@ -56,6 +56,7 @@ class _TermWidgetState extends State<TermWidget> {
                   widget.title,
                   style: const TextStyle(fontSize: 16.0, fontWeight: FontWeight.w800),
                 ),
+                const SizedBox(height: 8.0),
                 Text(widget.text),
                 Align(
                   alignment: Alignment.bottomRight,
@@ -87,7 +88,10 @@ class _TermWidgetState extends State<TermWidget> {
                 onTap: () {
                   setState(() => isAgree = !isAgree);
                 },
-                child: Text("${widget.title} 동의"))
+                child: Text(
+                  "${widget.title} 동의",
+                  style: const TextStyle(fontWeight: FontWeight.w600),
+                ))
           ],
         ),
       ],
