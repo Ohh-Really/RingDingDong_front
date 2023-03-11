@@ -14,10 +14,12 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ThemeData theme = ThemeData();
+
     return GetMaterialApp(
       initialRoute: '/service_select',
       initialBinding: AuthBinding(),
-      theme: ThemeData(
+      theme: theme.copyWith(
           appBarTheme: AppBarTheme(
             color: AppColors.primary,
             elevation: 0.0,
@@ -28,6 +30,7 @@ class App extends StatelessWidget {
               fontWeight: FontWeight.bold,
             ),
           ),
+          colorScheme: theme.colorScheme.copyWith(secondary: AppColors.primary),
           elevatedButtonTheme: ElevatedButtonThemeData(
             style: ElevatedButton.styleFrom(
                 backgroundColor: AppColors.primary,
