@@ -33,7 +33,8 @@ class App extends StatelessWidget {
             style: ElevatedButton.styleFrom(
                 backgroundColor: AppColors.primary,
                 foregroundColor: Colors.black,
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0))),
+                elevation: 0.0,
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0))),
           )),
       routes: {
         '/login': (context) => const LoginPage(),
