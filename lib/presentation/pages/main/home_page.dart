@@ -21,7 +21,9 @@ class HomePage extends GetView<HomeController> {
           actions: <Widget>[
             IconButton(
               icon: Icon(Icons.person),
-              onPressed: () {},
+              onPressed: () {
+                Get.toNamed('/my_page');
+              },
             )
           ],
         ),
@@ -48,8 +50,7 @@ class HomePage extends GetView<HomeController> {
           onPressed: () {},
           style: ElevatedButton.styleFrom(
             elevation: 0,
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
             primary: Color(0xffFFE16F),
             onPrimary: Color(0xffFFE16F),
           ),
@@ -91,16 +92,12 @@ class HomePage extends GetView<HomeController> {
           padding: const EdgeInsets.only(top: 16.0, right: 16.0, left: 16.0),
           decoration: BoxDecoration(
             color: Color(0xffFFE16F),
-            borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(8.0), topRight: Radius.circular(8.0)),
+            borderRadius: BorderRadius.only(topLeft: Radius.circular(8.0), topRight: Radius.circular(8.0)),
           ),
           child: TabBar(
             controller: controller.tabController,
             indicator: BoxDecoration(
-                borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(8.0),
-                    topRight: Radius.circular(8.0)),
-                color: Colors.white),
+                borderRadius: BorderRadius.only(topLeft: Radius.circular(8.0), topRight: Radius.circular(8.0)), color: Colors.white),
             labelColor: Colors.black,
             unselectedLabelColor: Colors.grey.shade500,
             tabs: controller.myTabs,
@@ -183,8 +180,7 @@ class HomePage extends GetView<HomeController> {
                         alignment: Alignment.centerLeft,
                         child: Text(
                           '공사 안내',
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 25),
+                          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
                         ),
                       ),
                       Container(
@@ -220,8 +216,7 @@ class HomePage extends GetView<HomeController> {
           },
           style: ElevatedButton.styleFrom(
             elevation: 0,
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
             primary: Colors.white,
             onPrimary: Colors.white,
           ),

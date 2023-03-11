@@ -33,9 +33,7 @@ class LoginPage extends GetView<AuthController> {
     return Container(
         decoration: BoxDecoration(
           color: Color(0xffFFE16F),
-          borderRadius: BorderRadius.only(
-              bottomRight: Radius.circular(30),
-              bottomLeft: Radius.circular(30)),
+          borderRadius: BorderRadius.only(bottomRight: Radius.circular(30), bottomLeft: Radius.circular(30)),
           boxShadow: [
             BoxShadow(
               color: Colors.grey.withOpacity(0.5),
@@ -71,10 +69,7 @@ class LoginPage extends GetView<AuthController> {
                 ),
                 alignment: Alignment.bottomLeft,
               ),
-              Expanded(
-                  flex: 1,
-                  child: Container(
-                      )),
+              Expanded(flex: 1, child: Container()),
               Container(
                 alignment: Alignment.bottomCenter,
                 child: Text(
@@ -92,7 +87,8 @@ class LoginPage extends GetView<AuthController> {
       alignment: Alignment.center,
       child: ElevatedButton(
           onPressed: () async {
-            await controller.login();
+            //await controller.login();
+            Get.toNamed('/term');
           },
           style: ElevatedButton.styleFrom(
             primary: Colors.white,
@@ -105,25 +101,6 @@ class LoginPage extends GetView<AuthController> {
               color: Colors.black,
             ),
           )),
-    );
-  }
-}
-
-class PolicyAgreePage extends StatelessWidget {
-  PolicyAgreePage({super.key});
-
-  final authController = Get.find<AuthController>();
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text("이용약관 동의")),
-      body: Center(
-          child: ElevatedButton(
-              onPressed: () async {
-                await authController.policyAgree();
-              },
-              child: const Text("동의"))),
     );
   }
 }
