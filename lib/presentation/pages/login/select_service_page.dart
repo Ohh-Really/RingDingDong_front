@@ -24,8 +24,6 @@ class SelectServicePage extends StatelessWidget {
                     child: SizedBox(
                   height: Get.height * 0.3,
                   child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                          backgroundColor: AppColors.primary, shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0))),
                       onPressed: () {},
                       child: Padding(
                         padding: const EdgeInsets.all(16.0),
