@@ -18,24 +18,30 @@ class App extends StatelessWidget {
       initialRoute: '/service_select',
       initialBinding: AuthBinding(),
       theme: theme.copyWith(
-          appBarTheme: AppBarTheme(
-            color: AppColors.primary,
-            elevation: 0.0,
-            iconTheme: const IconThemeData(color: Colors.black),
-            titleTextStyle: TextStyle(
-              color: Colors.black,
-              fontSize: Theme.of(context).textTheme.headlineSmall!.fontSize,
-              fontWeight: FontWeight.bold,
-            ),
+        appBarTheme: AppBarTheme(
+          color: AppColors.primary,
+          elevation: 0.0,
+          iconTheme: const IconThemeData(color: Colors.black),
+          titleTextStyle: TextStyle(
+            color: Colors.black,
+            fontSize: Theme.of(context).textTheme.headlineSmall!.fontSize,
+            fontWeight: FontWeight.bold,
           ),
-          colorScheme: theme.colorScheme.copyWith(secondary: AppColors.primary),
-          elevatedButtonTheme: ElevatedButtonThemeData(
-            style: ElevatedButton.styleFrom(
-                backgroundColor: AppColors.primary,
-                foregroundColor: Colors.black,
-                elevation: 0.0,
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0))),
-          )),
+        ),
+        colorScheme: theme.colorScheme.copyWith(secondary: AppColors.primary),
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ElevatedButton.styleFrom(
+              backgroundColor: AppColors.primary,
+              foregroundColor: Colors.black,
+              elevation: 0.0,
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0))),
+        ),
+        inputDecorationTheme: const InputDecorationTheme(
+          border: InputBorder.none,
+          hintStyle: TextStyle(color: Colors.black),
+        ),
+        textSelectionTheme: const TextSelectionThemeData(cursorColor: Colors.black),
+      ),
       routes: {
         '/login': (context) => const LoginPage(),
         '/my_page': (context) => const MyPage(),

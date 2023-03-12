@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ringdingdong/app/config/app_colors.dart';
 import 'package:ringdingdong/presentation/controllers/home_controller.dart';
-import 'package:ringdingdong/presentation/pages/report_page.dart';
-import 'package:ringdingdong/presentation/pages/post_page.dart';
+import 'package:ringdingdong/presentation/pages/detail/post_page.dart';
+import 'package:ringdingdong/presentation/pages/detail/report_page.dart';
 
 class HomePage extends GetView<HomeController> {
   const HomePage({super.key});
