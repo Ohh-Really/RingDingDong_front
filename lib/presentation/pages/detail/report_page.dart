@@ -22,21 +22,23 @@ class ReportPage extends GetView<AuthController> {
           ),
           title: const Text('신고하기'),
         ),
-        body: Center(
-          child: GetX(
-              init: controller,
-              builder: (_) {
-                if (controller.hasUserData.value) {
-                  return const Center(child: CircularProgressIndicator());
-                } else {
-                  return Column(
-                    children: [
-                      buildPostHeader(context),
-                      Expanded(child: buildPostDetail(context)),
-                    ],
-                  );
-                }
-              }),
+        body: SingleChildScrollView(
+          child: Center(
+            child: GetX(
+                init: controller,
+                builder: (_) {
+                  if (controller.hasUserData.value) {
+                    return const Center(child: CircularProgressIndicator());
+                  } else {
+                    return Column(
+                      children: [
+                        buildPostHeader(context),
+                        buildPostDetail(context),
+                      ],
+                    );
+                  }
+                }),
+          ),
         ));
   }
 
@@ -83,34 +85,34 @@ class ReportPage extends GetView<AuthController> {
         ),
         padding: const EdgeInsets.all(30),
         child: Column(
+          mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Expanded(
-                flex: 3,
-                child: Container(
-                  alignment: Alignment.center,
-                  padding: const EdgeInsets.fromLTRB(30, 10, 0, 0),
-                  margin: const EdgeInsets.all(20),
-                  decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(30)),
-                  child: TextFormField(
-                    decoration: const InputDecoration(
-                      hintText: '신고 내용을 작성해주세요.',
-                    ),
-                    maxLines: 20,
-                  ),
-                )),
-            Expanded(
-                flex: 1,
-                child: Container(
-                  padding: const EdgeInsets.all(20),
-                  child: ElevatedButton(
-                    onPressed: () {
-                      Get.off(() => const HomePage());
-                    },
-                    style: ElevatedButton.styleFrom(backgroundColor: Colors.white),
-                    child: Text('신고하기', style: AppTextStyles.button),
-                  ),
-                )),
+            Container(
+              alignment: Alignment.center,
+              padding: const EdgeInsets.fromLTRB(30, 10, 0, 0),
+              margin: const EdgeInsets.all(20),
+              decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(30)),
+              child: TextFormField(
+                decoration: const InputDecoration(
+                  hintText: '신고 내용을 작성해주세요.',
+                ),
+                maxLines: 10,
+              ),
+            ),
+            Container(
+              padding: const EdgeInsets.all(20),
+              child: ElevatedButton(
+                onPressed: () {
+                  Get.off(() => const HomePage());
+                },
+                style: ElevatedButton.styleFrom(backgroundColor: Colors.white),
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text('신고하기', style: AppTextStyles.button),
+                ),
+              ),
+            ),
           ],
         ));
   }
