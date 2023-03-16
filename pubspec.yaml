@@ -28,8 +28,11 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
+  firebase_core: ^2.7.1
+  firebase_messaging: ^14.2.6
   flutter:
     sdk: flutter
+  flutter_local_notifications: ^13.0.0
   flutter_secure_storage: ^8.0.0
   font_awesome_flutter: ^10.4.0
   freezed_annotation: null
@@ -64,7 +67,6 @@ flutter:
   assets:
     - assets/badges/
     - assets/icons/
-
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
   # For details regarding adding assets from package dependencies, see
