@@ -1,3 +1,4 @@
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -33,6 +34,7 @@ class AuthRepositoryIml extends AuthRepository {
 
         authController.user = user;
         storage.user = user;
+        storage.fcmToken = (await FirebaseMessaging.instance.getToken())!;
       } catch (e) {
         authController.user = null;
         storage.user = null;

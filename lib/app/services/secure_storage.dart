@@ -28,4 +28,8 @@ class SecureStorageService extends GetxService {
       _storage!.delete(key: 'user');
     }
   }
+
+  set fcmToken(String token) {
+    _storage!.write(key: 'token', value: token);
+  }
 }
