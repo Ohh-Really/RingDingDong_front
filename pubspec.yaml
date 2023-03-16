@@ -31,10 +31,9 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_secure_storage: ^8.0.0
+  font_awesome_flutter: ^10.4.0
   freezed_annotation:
   get:
-  html: ^0.15.1
-  webview_flutter:
 
 dev_dependencies:
   build_runner:
@@ -62,9 +61,9 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-  # assets:
-  #   - images/a_dot_burr.jpeg
-  #   - images/a_dot_ham.jpeg
+  assets:
+    - assets/badges/
+    - assets/icons/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
