@@ -3,26 +3,41 @@ import 'dart:io';
 import 'package:ringdingdong/data/providers/network/api_endpoint.dart';
 import 'package:ringdingdong/data/providers/network/api_provider.dart';
 import 'package:ringdingdong/data/providers/network/api_request_representable.dart';
+import 'package:ringdingdong/domain/entities/user.dart';
 
 enum AuthType { login, policyAgree }
 
 class AuthAPI implements APIRequestRepresentable {
   final AuthType type;
-  String? id;
-  String? email;
+  User? user;
+  String? token;
 
-  AuthAPI._({required this.type, required this.id, required this.email});
-  AuthAPI.login(String id, String email) : this._(type: AuthType.login, id: id, email: email);
-  AuthAPI.policyAgree(String id, String email) : this._(type: AuthType.policyAgree, id: id, email: email);
+  AuthAPI._({required this.type, this.user, this.token});
+  AuthAPI.login(User user) : this._(type: AuthType.login, user: user);
+  AuthAPI.policyAgree(String token) : this._(type: AuthType.policyAgree, token: token);
 
   @override
-  get body => {"id": id, "email": email};
+  Map<String, dynamic>? get body {
+    switch (type) {
+      case AuthType.login:
+        return user!.toJson();
+      default:
+        return null;
+    }
+  }
 
   @override
   String get endpoint => APIEndpoint.apiUrl;
 
   @override
-  Map<String, String> get headers => {HttpHeaders.contentTypeHeader: 'application/json'};
+  Map<String, String> get headers {
+    switch (type) {
+      case AuthType.login:
+        return {HttpHeaders.contentTypeHeader: 'application/json'};
+      case AuthType.policyAgree:
+        return {HttpHeaders.contentTypeHeader: 'application/json', 'jwt': token!};
+    }
+  }
 
   @override
   HTTPMethod get method {
@@ -36,8 +51,6 @@ class AuthAPI implements APIRequestRepresentable {
         return "/user/login";
       case AuthType.policyAgree:
         return "/user/policyAgree";
-      default:
-        return "";
     }
   }
 

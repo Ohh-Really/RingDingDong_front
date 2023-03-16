@@ -7,6 +7,7 @@ import 'package:ringdingdong/data/providers/network/apis/auth_api.dart';
 import 'package:ringdingdong/domain/entities/user.dart';
 import 'package:ringdingdong/domain/repositories/auth_repository.dart';
 import 'package:ringdingdong/presentation/controllers/auth/auth_controller.dart';
+import 'package:ringdingdong/presentation/pages/main/home_page.dart';
 
 class AuthRepositoryIml extends AuthRepository {
   final storage = Get.find<SecureStorageService>();
@@ -34,25 +35,23 @@ class AuthRepositoryIml extends AuthRepository {
 
         authController.user = user;
         storage.user = user;
-
-        GoogleSignIn().disconnect();
       } catch (e) {
         authController.user = null;
         storage.user = null;
-        print(e);
       }
     }
 
     try {
-      authController.token = await AuthAPI.login(authController.user!.id, authController.user!.email).request();
+      authController.token = await AuthAPI.login(authController.user!).request();
 
       if (authController.token.isNotEmpty) {
         Future.delayed(Duration.zero, () {
-          Get.offAndToNamed('/main');
+          Get.offAll(() => const HomePage());
         });
       }
-    } on UnauthorisedException {
-      Get.offAndToNamed('/policy_agree');
+    } on PolicyAgreeException catch (e) {
+      authController.token = e.details!;
+      Get.offAndToNamed('/term');
     } on BadRequestException {
       Get.snackbar("로그인 실패", "알 수 없는 이유로 로그인에 실패하였습니다.", snackPosition: SnackPosition.BOTTOM, margin: const EdgeInsets.all(8.0));
     }
@@ -60,11 +59,10 @@ class AuthRepositoryIml extends AuthRepository {
 
   @override
   Future<void> policyAgree() async {
-    User? user = await storage.getUser();
+    final authController = Get.find<AuthController>();
 
     try {
-      await AuthAPI.policyAgree(user!.id, user.email).request();
-      Get.offAllNamed("/main");
+      await AuthAPI.policyAgree(authController.token).request();
     } catch (e) {
       debugPrint(e.toString());
     }
