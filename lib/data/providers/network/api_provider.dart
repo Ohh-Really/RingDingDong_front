@@ -33,6 +33,8 @@ class APIProvider {
     switch (response.statusCode) {
       case 200:
         return response.body;
+      case 201:
+        throw PolicyAgreeException(response.body.toString());
       case 400:
         throw BadRequestException(response.body.toString());
       case 401:
@@ -66,6 +68,15 @@ class FetchDataException extends AppException {
       : super(
           code: "fetch-data",
           message: "Error During Communication",
+          details: details,
+        );
+}
+
+class PolicyAgreeException extends AppException {
+  PolicyAgreeException(String? details)
+      : super(
+          code: "need-policy-agree",
+          message: "Need Policy Agree",
           details: details,
         );
 }

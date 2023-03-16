@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ringdingdong/app/config/app_colors.dart';
 import 'package:ringdingdong/presentation/common_widgets.dart';
-import 'package:ringdingdong/presentation/pages/main/home_page.dart';
+import 'package:ringdingdong/presentation/controllers/auth/auth_controller.dart';
 
 class TermPage extends StatelessWidget {
-  const TermPage({super.key});
+  TermPage({super.key});
+
+  final authController = Get.find<AuthController>();
 
   @override
   Widget build(BuildContext context) {
@@ -18,8 +20,12 @@ class TermPage extends StatelessWidget {
               const SizedBox(height: 12.0),
               TermWidget(title: "서비스 이용 약관", text: "서비스 이용 약관 . . ."),
               TermWidget(title: "개인정보처리방침", text: "개인정보처리방침 . . ."),
-              CommonButton("시작하기", onPressed: () {
-                Get.offAll(() => const HomePage());
+              CommonButton("시작하기", onPressed: () async {
+                try {
+                  await authController.policyAgree();
+                } on Exception catch (e) {
+                  print(e);
+                }
               })
             ],
           ),

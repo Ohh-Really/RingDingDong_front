@@ -83,7 +83,7 @@ class LoginPage extends GetView<AuthController> {
       alignment: Alignment.center,
       child: ElevatedButton(
           onPressed: () async {
-            Get.toNamed('/term');
+            await controller.login();
           },
           style: ElevatedButton.styleFrom(
             elevation: 9,

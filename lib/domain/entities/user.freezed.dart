@@ -22,15 +22,9 @@ User _$UserFromJson(Map<String, dynamic> json) {
 mixin _$User {
   String get id => throw _privateConstructorUsedError;
   String get email => throw _privateConstructorUsedError;
+  @JsonKey(name: "displayName")
   String get name => throw _privateConstructorUsedError;
-  String get picture => throw _privateConstructorUsedError;
-  String get locale => throw _privateConstructorUsedError;
-  @JsonKey(name: "verified_email")
-  bool get verifiedEmail => throw _privateConstructorUsedError;
-  @JsonKey(name: "given_name")
-  String get givenName => throw _privateConstructorUsedError;
-  @JsonKey(name: "family_name")
-  String get familyName => throw _privateConstructorUsedError;
+  String? get photoUrl => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -45,12 +39,8 @@ abstract class $UserCopyWith<$Res> {
   $Res call(
       {String id,
       String email,
-      String name,
-      String picture,
-      String locale,
-      @JsonKey(name: "verified_email") bool verifiedEmail,
-      @JsonKey(name: "given_name") String givenName,
-      @JsonKey(name: "family_name") String familyName});
+      @JsonKey(name: "displayName") String name,
+      String? photoUrl});
 }
 
 /// @nodoc
@@ -69,11 +59,7 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
     Object? id = null,
     Object? email = null,
     Object? name = null,
-    Object? picture = null,
-    Object? locale = null,
-    Object? verifiedEmail = null,
-    Object? givenName = null,
-    Object? familyName = null,
+    Object? photoUrl = freezed,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -88,26 +74,10 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      picture: null == picture
-          ? _value.picture
-          : picture // ignore: cast_nullable_to_non_nullable
-              as String,
-      locale: null == locale
-          ? _value.locale
-          : locale // ignore: cast_nullable_to_non_nullable
-              as String,
-      verifiedEmail: null == verifiedEmail
-          ? _value.verifiedEmail
-          : verifiedEmail // ignore: cast_nullable_to_non_nullable
-              as bool,
-      givenName: null == givenName
-          ? _value.givenName
-          : givenName // ignore: cast_nullable_to_non_nullable
-              as String,
-      familyName: null == familyName
-          ? _value.familyName
-          : familyName // ignore: cast_nullable_to_non_nullable
-              as String,
+      photoUrl: freezed == photoUrl
+          ? _value.photoUrl
+          : photoUrl // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 }
@@ -121,12 +91,8 @@ abstract class _$$_UserCopyWith<$Res> implements $UserCopyWith<$Res> {
   $Res call(
       {String id,
       String email,
-      String name,
-      String picture,
-      String locale,
-      @JsonKey(name: "verified_email") bool verifiedEmail,
-      @JsonKey(name: "given_name") String givenName,
-      @JsonKey(name: "family_name") String familyName});
+      @JsonKey(name: "displayName") String name,
+      String? photoUrl});
 }
 
 /// @nodoc
@@ -141,11 +107,7 @@ class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res, _$_User>
     Object? id = null,
     Object? email = null,
     Object? name = null,
-    Object? picture = null,
-    Object? locale = null,
-    Object? verifiedEmail = null,
-    Object? givenName = null,
-    Object? familyName = null,
+    Object? photoUrl = freezed,
   }) {
     return _then(_$_User(
       id: null == id
@@ -160,26 +122,10 @@ class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res, _$_User>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      picture: null == picture
-          ? _value.picture
-          : picture // ignore: cast_nullable_to_non_nullable
-              as String,
-      locale: null == locale
-          ? _value.locale
-          : locale // ignore: cast_nullable_to_non_nullable
-              as String,
-      verifiedEmail: null == verifiedEmail
-          ? _value.verifiedEmail
-          : verifiedEmail // ignore: cast_nullable_to_non_nullable
-              as bool,
-      givenName: null == givenName
-          ? _value.givenName
-          : givenName // ignore: cast_nullable_to_non_nullable
-              as String,
-      familyName: null == familyName
-          ? _value.familyName
-          : familyName // ignore: cast_nullable_to_non_nullable
-              as String,
+      photoUrl: freezed == photoUrl
+          ? _value.photoUrl
+          : photoUrl // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -190,12 +136,8 @@ class _$_User implements _User {
   _$_User(
       {required this.id,
       required this.email,
-      required this.name,
-      required this.picture,
-      required this.locale,
-      @JsonKey(name: "verified_email") required this.verifiedEmail,
-      @JsonKey(name: "given_name") required this.givenName,
-      @JsonKey(name: "family_name") required this.familyName});
+      @JsonKey(name: "displayName") required this.name,
+      this.photoUrl});
 
   factory _$_User.fromJson(Map<String, dynamic> json) => _$$_UserFromJson(json);
 
@@ -204,24 +146,14 @@ class _$_User implements _User {
   @override
   final String email;
   @override
+  @JsonKey(name: "displayName")
   final String name;
   @override
-  final String picture;
-  @override
-  final String locale;
-  @override
-  @JsonKey(name: "verified_email")
-  final bool verifiedEmail;
-  @override
-  @JsonKey(name: "given_name")
-  final String givenName;
-  @override
-  @JsonKey(name: "family_name")
-  final String familyName;
+  final String? photoUrl;
 
   @override
   String toString() {
-    return 'User(id: $id, email: $email, name: $name, picture: $picture, locale: $locale, verifiedEmail: $verifiedEmail, givenName: $givenName, familyName: $familyName)';
+    return 'User(id: $id, email: $email, name: $name, photoUrl: $photoUrl)';
   }
 
   @override
@@ -232,20 +164,13 @@ class _$_User implements _User {
             (identical(other.id, id) || other.id == id) &&
             (identical(other.email, email) || other.email == email) &&
             (identical(other.name, name) || other.name == name) &&
-            (identical(other.picture, picture) || other.picture == picture) &&
-            (identical(other.locale, locale) || other.locale == locale) &&
-            (identical(other.verifiedEmail, verifiedEmail) ||
-                other.verifiedEmail == verifiedEmail) &&
-            (identical(other.givenName, givenName) ||
-                other.givenName == givenName) &&
-            (identical(other.familyName, familyName) ||
-                other.familyName == familyName));
+            (identical(other.photoUrl, photoUrl) ||
+                other.photoUrl == photoUrl));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, email, name, picture, locale,
-      verifiedEmail, givenName, familyName);
+  int get hashCode => Object.hash(runtimeType, id, email, name, photoUrl);
 
   @JsonKey(ignore: true)
   @override
@@ -263,15 +188,10 @@ class _$_User implements _User {
 
 abstract class _User implements User {
   factory _User(
-          {required final String id,
-          required final String email,
-          required final String name,
-          required final String picture,
-          required final String locale,
-          @JsonKey(name: "verified_email") required final bool verifiedEmail,
-          @JsonKey(name: "given_name") required final String givenName,
-          @JsonKey(name: "family_name") required final String familyName}) =
-      _$_User;
+      {required final String id,
+      required final String email,
+      @JsonKey(name: "displayName") required final String name,
+      final String? photoUrl}) = _$_User;
 
   factory _User.fromJson(Map<String, dynamic> json) = _$_User.fromJson;
 
@@ -280,20 +200,10 @@ abstract class _User implements User {
   @override
   String get email;
   @override
+  @JsonKey(name: "displayName")
   String get name;
   @override
-  String get picture;
-  @override
-  String get locale;
-  @override
-  @JsonKey(name: "verified_email")
-  bool get verifiedEmail;
-  @override
-  @JsonKey(name: "given_name")
-  String get givenName;
-  @override
-  @JsonKey(name: "family_name")
-  String get familyName;
+  String? get photoUrl;
   @override
   @JsonKey(ignore: true)
   _$$_UserCopyWith<_$_User> get copyWith => throw _privateConstructorUsedError;

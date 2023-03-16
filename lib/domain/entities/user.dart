@@ -10,12 +10,8 @@ class User with _$User {
   factory User({
     required String id,
     required String email,
-    required String name,
-    required String picture,
-    required String locale,
-    @JsonKey(name: "verified_email") required bool verifiedEmail,
-    @JsonKey(name: "given_name") required String givenName,
-    @JsonKey(name: "family_name") required String familyName,
+    @JsonKey(name: "displayName") required String name,
+    String? photoUrl,
   }) = _User;
 
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
