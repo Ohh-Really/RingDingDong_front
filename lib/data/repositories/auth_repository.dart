@@ -17,8 +17,6 @@ class AuthRepositoryIml extends AuthRepository {
     final authController = Get.find<AuthController>();
     User? user = await storage.getUser();
 
-    storage.user = null;
-
     if (user == null) {
       try {
         final GoogleSignInAccount? googleUser = await GoogleSignIn(scopes: [
