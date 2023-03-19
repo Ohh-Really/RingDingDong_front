@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ringdingdong/app/di/dependency.dart';
 import 'package:ringdingdong/app/services/fcm_service.dart';
+import 'package:ringdingdong/app/services/geolocator_service.dart';
 import 'package:ringdingdong/app/services/secure_storage.dart';
 import 'package:ringdingdong/presentation/app.dart';
 
@@ -17,6 +18,7 @@ initServices() async {
   FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
 
   await Get.putAsync(() => FCMService().init());
+  await Get.putAsync(() => GeolocatorService().init());
   await Get.putAsync(() => SecureStorageService().init());
 }
 
