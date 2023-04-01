@@ -36,6 +36,7 @@ dependencies:
   flutter_secure_storage: ^8.0.0
   font_awesome_flutter: ^10.4.0
   freezed_annotation: null
+  geolocator: ^9.0.2
   get: null
   google_sign_in: ^5.4.4
 
